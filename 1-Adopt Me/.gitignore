@@ -1,0 +1,7 @@
+node_modules/
+# .DS_Store  for MAC users
+.cache/
+dist/
+coverage/
+.vscode/
+.env
