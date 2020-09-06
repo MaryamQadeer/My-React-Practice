@@ -1,20 +1,17 @@
-import React, {useState , useEffect} from "react";
+import React, {useState , useEffect, useContext} from "react";
 import pet, {ANIMALS} from "@frontendmasters/pet";
 import useDropdown from "./useDropdown";
 import Results from "./Results";
+import ThemeContext from "./ThemeContext";
 
 const SearchParam = () => {
     const myBool = false;
-    // if (myBool){
-    //     const [location, setLocation] = useState("Seatle, WA");
-    // }
     const [location, setLocation] = useState("Seatle, WA");
-    // const [animal, setAnimal] = useState("dog");
-    // const [breed, setBreed] = useState("");
     const [animal, AnimalDropdown] = useDropdown("animal","dog", ANIMALS);
     const [breeds, setBreeds] = useState([]);
     const [breed, BreedDropdown, setBreed] = useDropdown("breed","", breeds);
     const [pets, setPets] = useState([]);
+    const [theme,setTheme] = useContext(ThemeContext);
 
     async function requestPets(){
         const {animals} = await pet.animals({
@@ -47,7 +44,20 @@ const SearchParam = () => {
                 </label>
                 <AnimalDropdown />
                 <BreedDropdown />
-                <button>
+                <label htmlFor="theme">
+                    Theme
+                    <select
+                        value={theme}
+                        onChange={e => setTheme(e.target.value)}
+                        onBlur={e => setTheme(e.target.value)}
+                    >
+                        <option value="peru">Peru</option>
+                        <option value="blue">Blue</option>
+                        <option value="mediumorchid">Medium Orchid</option>
+                        <option value="chartreuse">Chart Reuse</option>
+                    </select>
+                </label>
+                <button style={{backgroundColor: theme}}>
                     Submit
                 </button>
             </form>
