@@ -4,6 +4,7 @@ import styles from '../styles';
 
 const GenerateValuesCount = ({ data, cStyle }) => {
   const [isSelected, setIsSelected] = useState(false);
+  const [getItem, setItem] = useState('');
   return (
     <View style={styles.containOptions}>
       <FlatList
@@ -11,12 +12,19 @@ const GenerateValuesCount = ({ data, cStyle }) => {
         horizontal={true}
         keyExtractor={(item) => item.toString()}
         renderItem={({ item }) => (
-          <TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => {
+              setItem(item);
+              isSelected ? setIsSelected(false) : setIsSelected(true); // TODO: Highlight the field when selected
+            }}
+          >
             <Text
-              style={[styles.textSmall, styles.outline, cStyle]}
-              onPress={() => {
-                setIsSelected(true); // TODO: Highlight the field when selected
-              }}
+              style={[
+                styles.textSmall,
+                styles.outline,
+                cStyle,
+                isSelected && item === getItem && styles.selected,
+              ]}
               selected={isSelected}
             >
               {item}
