@@ -1,9 +1,9 @@
 import React from 'react';
 import { Text, View, Image, SafeAreaView, ScrollView } from 'react-native';
 import styles from '../styles';
+import HomeRequirements from '../Components/HomeRequirements';
 import GenerateValuesCount from '../Components/GenerateValuesCount';
-import Headings from '../Components/Headings';
-import Map from '../Components/Map';
+import HomeContacts from '../Components/HomeContacts';
 const Home = ({ navigation }) => {
   let data = [];
   const arr = ['Home', 'Flat', 'Upper Portion', 'Lower Portion'];
@@ -14,6 +14,52 @@ const Home = ({ navigation }) => {
     }
     return data;
   };
+  const items = [
+    {
+      id: 0,
+      src: require('../assets/home.png'),
+      text: 'Type',
+      additionalStyle: '',
+      data: arr,
+    },
+    {
+      id: 1,
+      src: require('../assets/bed.png'),
+      text: 'Beds',
+      additionalStyle: styles.circularItems,
+      data: generate(7),
+    },
+    {
+      id: 2,
+      src: require('../assets/bath.png'),
+      text: 'Baths',
+      additionalStyle: styles.circularItems,
+      data: generate(6),
+    },
+    {
+      id: 3,
+      src: require('../assets/members.png'),
+      text: 'Family Members',
+      additionalStyle: styles.circularItems,
+      data: generate(7),
+    },
+  ];
+  const contacts = [
+    {
+      id: 0,
+      src: require('../assets/phone.png'),
+      text: '+92 347 1111111',
+      additionalStyle: styles.circularItems,
+      source: require('../assets/edit.png'),
+    },
+    {
+      id: 1,
+      src: require('../assets/person.jpg'),
+      text: '+92 347 2222222',
+      additionalStyle: styles.circularItems,
+      source: require('../assets/edit.png'),
+    },
+  ];
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView>
@@ -25,37 +71,8 @@ const Home = ({ navigation }) => {
         </View>
         <Text style={styles.text}>I want to</Text>
         <GenerateValuesCount cStyle={styles.fixSize} data={['RENT', 'BUY']} />
-        <Headings src={require('../assets/home.png')} text="Type" />
-        <GenerateValuesCount data={arr} />
-        <Headings src={require('../assets/bed.png')} text="Beds" />
-        <GenerateValuesCount cStyle={styles.circularItems} data={generate(7)} />
-        <Headings src={require('../assets/bath.png')} text="Baths" />
-        <GenerateValuesCount cStyle={styles.circularItems} data={generate(6)} />
-        <Headings
-          src={require('../assets/members.png')}
-          text="Family Members"
-        />
-        <GenerateValuesCount cStyle={styles.circularItems} data={generate(7)} />
-        <View style={[styles.spaceBetweenRow]}>
-          <Headings
-            src={require('../assets/phone.png')}
-            text="+92 347 1111111"
-          />
-          <Image
-            style={styles.inlinePic}
-            source={require('../assets/edit.png')}
-          />
-        </View>
-        <View style={[styles.spaceBetweenRow]}>
-          <Headings
-            src={require('../assets/person.jpg')}
-            text="+92 347 1111111"
-          />
-          <Image
-            style={styles.inlinePic}
-            source={require('../assets/edit.png')}
-          />
-        </View>
+        <HomeRequirements data={items} />
+        <HomeContacts data={contacts} />
       </ScrollView>
     </SafeAreaView>
   );
